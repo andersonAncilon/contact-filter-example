@@ -4,10 +4,10 @@ This project is builded using ReactJS and Random User API. This is a basic examp
 
 ### How to start
 
-1- Clone the project
-2- Go to the project folder
-3- Open a terminal on current directory
-4- run the follow commands:
+#### 1- Clone the project
+#### 2- Go to the project folder
+#### 3- Open a terminal on current directory
+#### 4- run the follow commands:
     #yarn install
     #yarn start
 
