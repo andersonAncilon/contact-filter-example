@@ -1,21 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { styles } from './Style';
+import { Highlight } from '../highlight/Highlight';
 
-class Card extends Component {
-
-    render() {
-        return (
-            <>
-                {this.props.user ?
-                    <div style={styles.cardContainer}>
-                        <div style={styles.cardHeader}>
-                            <h3 style={styles.cardHeaderTitle}>{this.props.user.name.first}</h3>
-                        </div>
-                        <img style={styles.cardImage} alt={`The face of ${this.props.user.name.first}`} src={this.props.user.picture.large} />
-                    </div> : ''}
-            </>
-        );
-    }
-}
+const Card = ({ props, highlight = '' }) => {
+	return (
+		<div style={styles.cardContainer}>
+			<div style={styles.cardHeader}>
+				<Highlight text={props.name.first} style={styles.cardHeaderTitle} exp={highlight}/>
+			</div>
+			<img style={styles.cardImage} alt={`The face of ${props.name.first}`} src={props.picture.large} />
+		</div>
+	);
+};
 
 export default Card;

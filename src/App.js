@@ -8,42 +8,26 @@ import { GetUsers } from './helpers/Api';
 class App extends Component {
 
   state = {
-    count: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    filtered: [],
+    searchBarValue: '',
     users: []
   }
 
   handleChange = (e) => {
-    let currentList = [];
-    let newList = [];
+    this.setState({ searchBarValue: e.target.value })
+  }
 
-    if (e.target.value !== '') {
-      //Set the current list
-      currentList = this.state.users;
-
-      //Filter the items based on the input value
-      newList = currentList.map((item) => {
-        const entry = e.target.value.toLowerCase();
-        const itemFiltered = item;
-
-        if (itemFiltered.name.first.includes(entry)) {
-          return itemFiltered
-        }
-
-      });
-    }
-    else {
-      newList = this.state.users;
-    }
-
-    this.setState({
-      filtered: newList
+  renderContacts() {
+    return this.state.users.filter((item) => {
+      return item.name.first.toLowerCase().includes(this.state.searchBarValue.toLowerCase())
     })
+    .map((item, index) => {
+      return <Card key={index} props={item} highlight={this.state.searchBarValue}/>
+    });
   }
 
   async componentWillMount() {
     await GetUsers(50, 'br').then(res => {
-      this.setState({ users: res.data.results, filtered: res.data.results })
+      this.setState({ users: res.data.results })
     })
   }
 
@@ -52,7 +36,7 @@ class App extends Component {
       <div className="App">
         <Search onChange={this.handleChange} placeholder="Type a text fo filter" />
         <div className="CardComponentContainer">
-          {this.state.filtered.map((item, index) => { return <Card key={index} user={item} /> })}
+          { this.renderContacts() }
         </div>
       </div>
     );

@@ -1,9 +1,11 @@
 export const style = {
     input: {
         borderRadius: '5px',
-        backgroundColor: 'black',
-        color: 'white',
+        backgroundColor: 'white',
+        color: 'black',
         fontSize: '25px',
-        textAlign: 'center'
+        textAlign: 'center',
+        borderStyle: 'none',
+        margin: '25px',
     }
 }
